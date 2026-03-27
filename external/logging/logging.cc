@@ -89,8 +89,8 @@ void Logger::logv(LogLevel level, const char *_fmt, va_list ap) {
 #elif defined(_POSIX_VERSION)
     vsyslog(LOG_ERR, fmt_buffer, ap);
 #endif
-#endif
   }
+#endif
 
   if (log_file_ != nullptr) {
     char buffer[0x4000] = {0};
