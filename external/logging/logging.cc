@@ -58,6 +58,7 @@ void Logger::logv(LogLevel level, const char *_fmt, va_list ap) {
 
   snprintf(fmt_buffer + strlen(fmt_buffer), sizeof(fmt_buffer) - strlen(fmt_buffer), "%s\n", _fmt);
 
+#ifndef NO_SYSLOG
   if (enable_syslog_) {
 #if defined(__APPLE__)
     extern void *_os_log_default;
@@ -87,6 +88,7 @@ void Logger::logv(LogLevel level, const char *_fmt, va_list ap) {
     }
 #elif defined(_POSIX_VERSION)
     vsyslog(LOG_ERR, fmt_buffer, ap);
+#endif
 #endif
   }
 
